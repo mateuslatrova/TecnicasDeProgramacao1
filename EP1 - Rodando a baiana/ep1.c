@@ -21,7 +21,7 @@ float sen(float x) {
     float parcela = x;
     float seno = 0;
     
-    while (parcela > 10e-4) {
+    while (fabs(parcela) > 10e-4) {
         seno += parcela; 
         k++;
         parcela = (potencia(-1,k)*potencia(x,2*k+1))/fatorial(2*k+1);
