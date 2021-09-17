@@ -31,7 +31,6 @@ float sen(float x) {
 }
 
 float cos(float senx) {
-    // TODO: conferir tratamento do sinal.
     float cos = sqrt(1-pow(senx,2));
     return cos; 
 }
@@ -48,7 +47,7 @@ float* multiplicaMatrizVetor(float* m, float* v) {
 float* matrizDeRotacao(float theta) {
     float seno = sen(theta);
     float cosseno = cos(seno);
-    float* M = malloc(4*sizeof(float));
+    float* M = (float*) malloc(4*sizeof(float));
     M[0] = cosseno;
     M[1] = -seno;
     M[2] = seno;
@@ -63,4 +62,33 @@ float* rotaciona(float* v, float theta) {
     float* vRotacionado = multiplicaMatrizVetor(R,v);
 
     return vRotacionado;
+}
+
+void testeUnitario(float* v, float theta) {
+
+    float* vRotacionado = rotaciona(v,theta);
+
+    printf("%f %f", vRotacionado[0], vRotacionado[1]);
+}
+
+int main() {
+    
+    float PI = 3.1415;
+    float v[2];
+
+    // Testes:
+
+    v[0] = 4.0, v[1] = 0.0;
+    testeUnitario(v, PI);
+
+    v[0] = 0.0, v[1] = 7.0;
+    testeUnitario(v, PI/2);
+
+    v[0] = 1.0, v[1] = 0.5;
+    testeUnitario(v, 4*PI/3);
+    
+    v[0] = -1.0, v[1] = -2.0;
+    testeUnitario(v, PI/6);
+
+    return 0;
 }
