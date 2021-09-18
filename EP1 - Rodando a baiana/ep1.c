@@ -37,9 +37,19 @@ float cos(float senx) {
 
 float* multiplicaMatrizVetor(float* m, float* v) {
     float* resultado = malloc(2*sizeof(float));
-    
-    resultado[0] = m[0]*v[0] + m[1]*v[1];
-    resultado[1] = m[2]*v[0] + m[3]*v[1];
+    int nLins = 2, nCols = 2;
+
+    resultado[0] = 0;
+    resultado[1] = 0;
+
+    int i = 0, j = 0;
+    while (i < nLins) {
+        while(j < nCols) {
+            resultado[i] += m[i*nCols+j] * v[j];
+            j++;
+        }
+        i++;
+    }
 
     return resultado;
 }
