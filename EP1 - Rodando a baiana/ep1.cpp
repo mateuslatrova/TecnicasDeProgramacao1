@@ -1,6 +1,6 @@
 #include "stdlib.h"
 #include "stdio.h"
-#include "math.h"
+#include <cmath>
 
 int fatorial(int n) {
     if (n == 0) return 1;
@@ -36,7 +36,7 @@ float cos(float senx) {
 }
 
 float* multiplicaMatrizVetor(float* m, float* v) {
-    float* resultado = malloc(2*sizeof(float));
+    float* resultado = (float*) malloc(2*sizeof(float));
     int nLins = 2, nCols = 2;
 
     resultado[0] = 0;
@@ -44,12 +44,13 @@ float* multiplicaMatrizVetor(float* m, float* v) {
 
     int i = 0, j = 0;
     while (i < nLins) {
+        j = 0;
         while(j < nCols) {
             resultado[i] += m[i*nCols+j] * v[j];
             j++;
         }
         i++;
-    }
+    }   
 
     return resultado;
 }
@@ -84,10 +85,9 @@ void testeUnitario(float* v, float theta) {
 int main() {
     
     float PI = 3.1415;
-    float v[2];
+    float* v = (float*) malloc(2*sizeof(float));
 
     // Testes:
-
     v[0] = 4.0, v[1] = 0.0;
     testeUnitario(v, PI);
 
@@ -100,5 +100,10 @@ int main() {
     v[0] = -1.0, v[1] = -2.0;
     testeUnitario(v, PI/6);
 
+    //float angulo = 5*PI/6;
+    //float M[4] = {cos(angulo) , -sin(angulo), sin(angulo), cos(angulo)};
+    //float v[2] = {1.0, 2.0};
+    //float* vRot = multiplicaMatrizVetor(M,v); 
+    //printf("%f %f", vRot[0], vRot[1]);
     return 0;
 }
